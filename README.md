@@ -3,7 +3,8 @@
 MixTape is a PHP class that picks a random year within the specified decade and
 returns a random song from the Billboard Hot 100 archive.
 
-Here's some example code that uses the class.
+Here's some example code that uses the class to pick 15 songs from my preferred
+list of decades.
 
 ```
 <?php
@@ -15,6 +16,13 @@ require 'MixTape.php';
 $mixTape = new MixTape;
 $picks = $mixTape->getPicks();
 print_r($picks);
+```
+
+Here's how you would pick a single song from a specific decade.
+
+```
+$pick = $mixTape->randomPick('1980');
+print_r($pick);
 ```
 
 ## Rational

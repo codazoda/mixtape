@@ -36,6 +36,34 @@ class MixTape
     }
 
     /**
+     * Pick a random year for the decade and a random song from that list.
+     *
+     * @param  String $decade  A decade to pick from such as 1980, 1990, 2000.
+     * @return Array           An array for this pick including the url, random pick number we selected, and song title.
+     */
+    public function randomPick($decade)
+    {
+        // $decade must be 4 digits
+        $shortDecade = substr($decade, 0, 3);
+        $year = $shortDecade . mt_rand(0, 9);
+        $currentYear = date('Y');
+        if ($year > $currentYear) {
+            $year = $currentYear;
+        }
+        $archiveUrl = "http://www.billboard.com/archive/charts/{$year}/hot-100";
+        $song = $this->getSong($archiveUrl);
+        // Trim and decode the returned song
+        $song['song'] = html_entity_decode(trim($song['song']));
+        // Write
+        $pick = array(
+            'url' => $archiveUrl,
+            'pick' => $song['pick'],
+            'song' => $song['song']
+        );
+        return $pick;
+    }
+
+    /**
      * Get a random song from a billboard archive URL
      *
      * @param  String $url  The URL to fetch the list of songs from
@@ -58,33 +86,5 @@ class MixTape
             'pick' => $pick,
             'song' => $song
         );
-    }
-
-    /**
-     * Pick a random year for the decade and a random song from that list.
-     *
-     * @param  String $decade  A decade to pick from such as 1980, 1990, 2000.
-     * @return Array           An array for this pick including the url, random pick number we selected, and song title.
-     */
-    private function randomPick($decade)
-    {
-        // $decade must be 4 digits
-        $shortDecade = substr($decade, 0, 3);
-        $year = $shortDecade . mt_rand(0, 9);
-        $currentYear = date('Y');
-        if ($year > $currentYear) {
-            $year = $currentYear;
-        }
-        $archiveUrl = "http://www.billboard.com/archive/charts/{$year}/hot-100";
-        $song = $this->getSong($archiveUrl);
-        // Trim and decode the returned song
-        $song['song'] = html_entity_decode(trim($song['song']));
-        // Write
-        $pick = array(
-            'url' => $archiveUrl,
-            'pick' => $song['pick'],
-            'song' => $song['song']
-        );
-        return $pick;
     }
 }
