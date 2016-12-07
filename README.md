@@ -25,7 +25,7 @@ $pick = $mixTape->randomPick('1980');
 print_r($pick);
 ```
 
-## Rational
+## Rationale
 
 I created MixTape because I wanted some random song picks for CD's that I can
 put into my old school truck radio. I want some variety so each list of songs
