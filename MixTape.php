@@ -2,13 +2,14 @@
 
 namespace codazoda\music;
 
-$mixTape = new MixTape;
-$picks = $mixTape->getPicks();
-print_r($picks);
-
 class MixTape
 {
 
+    /**
+     * Pick 16 songs from years that I like for a personal mix tape.
+     *
+     * @return Array  An array of 15 picks including the url, random pick number we selected, and the song title.
+     */
     public function getPicks()
     {
         // Gather a bunch of picks from certain years
@@ -36,7 +37,7 @@ class MixTape
 
     /**
      * Get a random song from a billboard archive URL
-     * 
+     *
      * @param  String $url  The URL to fetch the list of songs from
      * @return Array        An array containing the song and the random pick number we selected
      */
@@ -50,7 +51,7 @@ class MixTape
         preg_match_all('/<td class="views-field views-field-field-chart-item-song" ( rowspan="[0-9][0-9]?")*>(.*?)<\/td>/is', $page, $matches);
         
         $songCount = count($matches[2]);
-        $pick = mt_rand(1, $songCount);
+        $pick = mt_rand(1, $songCount-1);
         $song = $matches[2][$pick];
 
         return array(
@@ -61,7 +62,7 @@ class MixTape
 
     /**
      * Pick a random year for the decade and a random song from that list.
-     * 
+     *
      * @param  String $decade  A decade to pick from such as 1980, 1990, 2000.
      * @return Array           An array for this pick including the url, random pick number we selected, and song title.
      */
