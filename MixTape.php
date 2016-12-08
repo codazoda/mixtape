@@ -14,22 +14,26 @@ class MixTape
     {
         // Gather a bunch of picks from certain years
         $picks = array(
-            $this->randomPick('1980'),
-            $this->randomPick('1980'),
-            $this->randomPick('1980'),
-            $this->randomPick('1990'),
-            $this->randomPick('1990'),
-            $this->randomPick('1990'),
-            $this->randomPick('2000'),
-            $this->randomPick('2000'),
-            $this->randomPick('2000'),
             $this->randomPick('2010'),
-            $this->randomPick('2010'),
-            $this->randomPick('2010'),
-            $this->randomPick('1980'),
-            $this->randomPick('1990'),
             $this->randomPick('2000'),
-            $this->randomPick('2010')
+            $this->randomPick('1980'),
+            $this->randomPick('2000'),
+            $this->randomPick('1990'),
+            $this->randomPick('2010'),
+            $this->randomPick('2000'),
+            $this->randomPick('1980'),
+            $this->randomPick('2000'),
+            $this->randomPick('1990'),
+            $this->randomPick('2010'),
+            $this->randomPick('2000'),
+            $this->randomPick('1980'),
+            $this->randomPick('2000'),
+            $this->randomPick('1990'),
+            $this->randomPick('2010'),
+            $this->randomPick('2000'),
+            $this->randomPick('1980'),
+            $this->randomPick('2000'),
+            $this->randomPick('1990')
         );
         shuffle($picks);
         return $picks;
