@@ -6,46 +6,13 @@ class MixTape
 {
 
     /**
-     * Pick 16 songs from years that I like for a personal mix tape.
-     *
-     * @return Array  An array of 15 picks including the url, random pick number we selected, and the song title.
-     */
-    public function getPicks()
-    {
-        // Gather a bunch of picks from certain years
-        $picks = array(
-            $this->randomPick('2010'),
-            $this->randomPick('2000'),
-            $this->randomPick('1980'),
-            $this->randomPick('2000'),
-            $this->randomPick('1990'),
-            $this->randomPick('2010'),
-            $this->randomPick('2000'),
-            $this->randomPick('1980'),
-            $this->randomPick('2000'),
-            $this->randomPick('1990'),
-            $this->randomPick('2010'),
-            $this->randomPick('2000'),
-            $this->randomPick('1980'),
-            $this->randomPick('2000'),
-            $this->randomPick('1990'),
-            $this->randomPick('2010'),
-            $this->randomPick('2000'),
-            $this->randomPick('1980'),
-            $this->randomPick('2000'),
-            $this->randomPick('1990')
-        );
-        shuffle($picks);
-        return $picks;
-    }
-
-    /**
      * Pick a random year for the decade and a random song from that list.
      *
      * @param  String $decade  A decade to pick from such as 1980, 1990, 2000.
+     * @param  String $list    A Billboard list such as 'hot-100' or 'r-b-hip-hop-songs'
      * @return Array           An array for this pick including the url, random pick number we selected, and song title.
      */
-    public function randomPick($decade)
+    public function randomPick($decade, $list = 'hot-100')
     {
         // $decade must be 4 digits
         $shortDecade = substr($decade, 0, 3);
@@ -54,7 +21,7 @@ class MixTape
         if ($year > $currentYear) {
             $year = $currentYear;
         }
-        $archiveUrl = "http://www.billboard.com/archive/charts/{$year}/hot-100";
+        $archiveUrl = "http://www.billboard.com/archive/charts/{$year}/{$list}";
         $song = $this->getSong($archiveUrl);
         // Trim and decode the returned song
         $song['song'] = html_entity_decode(trim($song['song']));
